@@ -1,0 +1,3 @@
+# ignored files/folders on pull/push
+.idea/
+test/

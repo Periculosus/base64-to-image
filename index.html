@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+        }
+        img {
+            width: 100%;
+        }
+        #dropArea {
+            width: 95%;
+            height: 400px;
+            margin: 2%;
+            border: solid 3px black;
+        }
+        #dropArea:hover {
+            background-color: cadetblue;
+        }
+    </style>
+
+    <script>
+        window.nodeRequire = require;
+        delete window.module;
+//        window.req = window.dep = null;
+    </script>
+
+    <title>Title</title>
+</head>
+<body>
+
+    <h1>Перетаскивать сюда</h1>
+    <div id="dropArea"></div>
+
+    <script>
+        //calling modules
+        var dragNDrop = require('drag-drop');
+        var fileServer = require('fs');
+
+        dragNDrop('#dropArea', function (files) {
+
+            //read date and time of operation
+            var today = new Date(),
+            date = today.getDate() + "." + (today.getMonth() + 1) + "." + today.getFullYear(),
+            time = today.getHours() + "-" + today.getMinutes() + "-" + today.getSeconds(),
+            fullTime = "-date_" + date + "-time_" + time;
+
+            //creating folder at operation time
+            var folderName = "dropped_at" + fullTime;
+            fileServer.mkdirSync(folderName);
+
+            for(var i = 0; i <= files.length; i++) {
+                //read dropped txt files
+                fileServer.readFile(files[i].path, 'utf8', function (err, fileData) {
+                    if(err) throw (alert(err));
+
+                    //replacing image info for clear base64 type
+                    var test = fileData.replace(/^data:image\/jpeg;base64,/, "");
+
+                    //saving to created folder
+                    fileServer.writeFileSync(folderName + "/screenshot" + i + ".jpeg", test, 'base64', function(err) {
+                        if(err) throw (alert(err));
+                    });
+
+                           /*     // binary version
+                     //    var base64Data  =   fileData.replace(/^data:image\/jpeg;base64,/, "");
+                     //    base64Data  +=  base64Data.replace('+', ' ');
+                     //    var binaryData  =   new Buffer(base64Data, 'base64').toString('binary');
+                     //    fileServer.writeFile("out.jpeg", binaryData, "binary", function (err) {
+                     //    console.log(err); // writes out file without error, but it's not a valid image
+                     // });
+                     */
+                });
+            }
+
+        });
+    </script>
+</body>
+</html>

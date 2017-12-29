@@ -1,0 +1,23 @@
+{
+  "name": "electron-quick-start",
+  "version": "1.0.0",
+  "description": "A minimal Electron application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "https://github.com/Periculosus/base64-to-image",
+  "keywords": [
+    "Electron",
+    "quick",
+    "start",
+    "tutorial",
+    "demo"
+  ],
+  "author": "Alex",
+  "license": "free",
+  "devDependencies": {
+    "electron": "~1.7.8",
+    "electron-packager": "^8.1.0"
+  }
+}
