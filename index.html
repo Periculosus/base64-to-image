@@ -61,7 +61,7 @@
                     var test = fileData.replace(/^data:image\/jpeg;base64,/, "");
 
                     //saving to created folder
-                    fileServer.writeFileSync(folderName + "/screenshot" + i + ".jpeg", test, 'base64', function(err) {
+                    fileServer.appendFile(folderName + "/screenshot" + fullTime + ".jpeg", test, 'base64', function(err) {
                         if(err) throw (alert(err));
                     });
 
