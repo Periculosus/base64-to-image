@@ -49,32 +49,62 @@
             fullTime = "-date_" + date + "-time_" + time;
 
             //creating folder at operation time
-            var folderName = "dropped_at" + fullTime;
+            var folderName = "c:/" + fullTime;
             fileServer.mkdirSync(folderName);
 
+            console.log(files);
+
+            for(var i = 0; i <= files.length; i++) {
+
+                convertFile(files[i].path, folderName, i);
+
+            }
+
+            function convertFile(path, savePath, fileId) {
+
+                fileServer.readFile(path, 'utf8', function (err, fileData) {
+                    if (err) throw err;
+                    // var txtToJpeg = (path.split(".txt") + ".jpeg").replace(/,/g, '');
+                    fileServer.writeFile(savePath + "/screenshot" + fileId + ".jpeg", fileData, 'base64', function(err) {
+                        if(err) throw (err);
+                    });
+                });
+
+                // fileServer.readFile(path, {encoding: 'utf8'}, function(error, content) {
+                //     if (error) throw error;
+                //
+                //     fileServer.writeFile(path, content, {encoding: 'base64'}, function(error) {
+                //         if (error) throw error
+                //     })
+                // })
+            }
+
+            /*
             for(var i = 0; i <= files.length; i++) {
                 //read dropped txt files
                 fileServer.readFile(files[i].path, 'utf8', function (err, fileData) {
                     if(err) throw (alert(err));
 
                     //replacing image info for clear base64 type
-                    var test = fileData.replace(/^data:image\/jpeg;base64,/, "");
+                    // var test = fileData.replace(/^data:image\/jpeg;base64,/, "");
 
                     //saving to created folder
-                    fileServer.appendFile(folderName + "/screenshot" + fullTime + ".jpeg", test, 'base64', function(err) {
+                    fileServer.appendFile(folderName + "/screenshot" + i + ".txt", fileData, 'base64', function(err) {
                         if(err) throw (alert(err));
                     });
 
-                           /*     // binary version
+                     // // binary version
                      //    var base64Data  =   fileData.replace(/^data:image\/jpeg;base64,/, "");
                      //    base64Data  +=  base64Data.replace('+', ' ');
                      //    var binaryData  =   new Buffer(base64Data, 'base64').toString('binary');
-                     //    fileServer.writeFile("out.jpeg", binaryData, "binary", function (err) {
-                     //    console.log(err); // writes out file without error, but it's not a valid image
+                     //    fileServer.writeFile(folderName + "/screenshot" + i + ".txt", binaryData, "binary", function (err) {
+                     //    // console.log(err); // writes out file without error, but it's not a valid image
                      // });
-                     */
+
                 });
             }
+            */
+
 
         });
     </script>
