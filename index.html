@@ -3,77 +3,33 @@
 <head>
     <meta charset="UTF-8">
 
-    <style>
-        body {
-            text-align: center;
-            margin: 0;
-        }
-        img {
-            width: 100%;
-        }
-        #dropArea {
-            width: 95%;
-            height: 400px;
-            margin: 2%;
-            border: solid 3px black;
-        }
-        /*#dropArea:hover {*/
-            /*background-color: cadetblue;*/
-        /*}*/
-    </style>
-
     <script>
         window.nodeRequire = require;
         delete window.module;
-//        window.req = window.dep = null;
+        //window.req = window.dep = null;
     </script>
 
-    <title>Title</title>
+    <link rel="stylesheet" href="index.css">
+
+    <title>base64-to-jpeg</title>
 </head>
 <body>
+    <!--<input style="display:none;" id="fileDialog" type="file" webkitdirectory/>-->
+    <input id="fileItem" type="file" webkitdirectory>
 
-    <h1>Drop Here</h1>
-    <div id="dropArea"></div>
+    <div id="inputArea">
+        <input type="text" name="filesPath"><br>
+        <input type="text" name="savePath"><br>
+
+        <select id="encodingListID" class="encodingListClass"></select><br>
+        <select id="extensionListID" class="extensionListClass"></select><br>
+
+        <button id="convertFiles">Convert files</button><br>
+    </div>
+
+    <div id="dropArea"><h1>Drop Files Here</h1></div>
 
     <script type="text/javascript" src="js_libs/jquery-3.2.1.min.js"></script>
-    <script>
-
-        //calling modules
-        var dragNDrop = require('drag-drop');
-        var fileServer = require('fs');
-
-        dragNDrop('#dropArea', function (files) {
-
-            //read date and time of operation
-            var today = new Date(),
-            date = today.getDate() + "." + (today.getMonth() + 1) + "." + today.getFullYear(),
-            time = today.getHours() + "-" + today.getMinutes() + "-" + today.getSeconds(),
-            fullTime = "-date_" + date + "-time_" + time;
-
-            //creating folder at operation time
-            var folderName = "c:/" + fullTime;
-            fileServer.mkdirSync(folderName);
-
-            console.log(files);
-
-            for (var i = 0; i <= files.length; i++) {
-                convertFile(files[i].path, folderName, i);
-            }
-
-            function convertFile(path, savePath, fileId) {
-
-                fileServer.readFile(path, 'utf8', function (err, fileData) {
-                    if (err) throw err;
-                    // var txtToJpeg = (path.split(".txt") + ".jpeg").replace(/,/g, '');
-                    fileServer.writeFile(savePath + "/screenshot" + fileId + ".jpeg", fileData, 'base64', function(err) {
-                        if(err) throw (err);
-                    });
-                });
-
-            }
-
-        });
-
-    </script>
+    <script type="text/javascript" src="index.js"></script>
 </body>
 </html>

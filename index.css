@@ -1,0 +1,29 @@
+body {
+    text-align: center;
+    margin: 0;
+}
+img {
+    width: 100%;
+}
+#inputArea {
+    border: solid 3px black;
+    width: 95%;
+    margin: 2%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+#dropArea {
+    width: 95%;
+    height: 300px;
+    margin: 2%;
+    border: solid 3px black;
+}
+#dropArea:hover {
+    background-color: aquamarine;
+}
+#dropArea h1 {
+    position: relative;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
