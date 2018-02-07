@@ -14,7 +14,7 @@ img {
 }
 #dropArea {
     width: 95%;
-    height: 300px;
+    height: 200px;
     margin: 2%;
     border: solid 3px black;
 }
@@ -26,4 +26,10 @@ img {
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
+}
+input, select, button {
+    margin: 2px;
+}
+h2 {
+    margin: 0;
 }

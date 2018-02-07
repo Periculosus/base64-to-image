@@ -15,17 +15,21 @@
 </head>
 <body>
     <!--<input style="display:none;" id="fileDialog" type="file" webkitdirectory/>-->
-    <input id="fileItem" type="file" webkitdirectory>
+    <!--<input id="fileItem" type="file" webkitdirectory>-->
 
     <div id="inputArea">
-        <input type="text" name="filesPath"><br>
-        <input type="text" name="savePath"><br>
+        <h2>Options</h2>
+        file path <input id="filesPath" type="text" name="filesPath" title="only for manual encode"><br>
+        save path <input id="savePath" type="text" name="savePath"><br>
+        save file name <input id="saveFileName" type="text" name="saveFileName"><br>
 
-        <select id="encodingListID" class="encodingListClass"></select><br>
-        <select id="extensionListID" class="extensionListClass"></select><br>
+        encoding list <select id="encodingList" class="encodingListClass"></select><br>
+        extension list <select id="extensionList" class="extensionListClass"></select><br>
 
         <button id="convertFiles">Convert files</button><br>
     </div>
+
+    <p id="pEst"></p>
 
     <div id="dropArea"><h1>Drop Files Here</h1></div>
 
