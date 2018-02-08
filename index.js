@@ -32,7 +32,7 @@ function convertFile(filePath, savePath, fileId, fileName, extension, encoding) 
         });
     });
 }
-
+//to do emptiness test
 function emptinessTest() {
     $("input").each(function () {
         var isEmpty = 1;
